@@ -1,0 +1,28 @@
+1. Inheritance is used in the core design. the SeaCreature class is inherited by
+Fish, Jellyfish, Crab, and CustomFish. Because of this, they can all be managed
+together and put inside the tank array.
+
+2. SeaCreature has methods such as move() and getSymbol(), which is overridden by
+all other subclasses. Since each subclass can move and be visually displayed
+differently, it needs to be overridden.
+
+3. The SeaCreature[] tank array can contain all classes that inherit the SeaCreature
+class. If there was a class that didn't inherit SeaCreature, it would not be
+storable in the tank array. This is an example of polymorphism.
+
+4. For this example, lets have variables A and B. Variable A holds a Fish object with
+a speed of 4. If B is then set to equal A, both A and B will hold the same object.
+If the Fish's speed were to be changed, you can make the change using either A or B and
+both will reflect the same new speed.
+
+5. The most meaningful commit would have to be in my repository:
+"Added CustomFish.java and FishMaker's makeFish() functionality,
+allowing the user to add custom fish to the tank"
+
+This commit added the CustomFish.java class and added onto the previous commit's FishMaker
+class. The FishMaker's makeFish() method prompts the user for a fish's name, speed, and symbol.
+Then, after randomizing the position, it then adds it to the now protected tank Array in Aquarium.
+
+6. If we wanted to have more SeaCreatures in the tank, it is much more efficient to use an ArrayList
+instead of an Array, because ArrayLists automatically expand and shrink depending on the number of
+items in the Array.
