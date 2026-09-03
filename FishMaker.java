@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -23,19 +24,34 @@ public class FishMaker {
         System.out.print(" ");
         String FishSymbol = input.nextLine().trim();
 
-        int currentAmountOfFish = 0;
-        for (int i = 0; i < AquariumApp.MAX_FISH; i++) {
-            if (AquariumApp.tank[i] != null) {
-                currentAmountOfFish++;
-            } else {
-                break;
-            }
-        }
+        input.close();
+
+//        int currentAmountOfFish = 0;
+//        for (int i = 0; i < AquariumApp.MAX_FISH; i++) {
+//            if (AquariumApp.tank[i] != null) {
+//                currentAmountOfFish++;
+//            } else {
+//                break;
+//            }
+//        }
 
         Random random = new Random();
-        int randomPos = random.nextInt(AquariumApp.MAX_FISH+1);
+        int randomPos = random.nextInt(1,Aquarium.TANK_WIDTH+1);
         try {
-            AquariumApp.tank[currentAmountOfFish] = new CustomFish(FishName, randomPos, FishSpeed, 1, FishSymbol);
+
+            try {
+               File file = new File("creatures.txt");
+               // Credits to "Kip" on StackOverflow for the documentation!
+//               Printer fileWriter = new Scanner(file);
+
+//               fileWriter.();
+
+//               AquariumApp.tank[currentAmountOfFish] = new CustomFish(FishName, randomPos, FishSpeed, 1, FishSymbol);
+            } catch (Exception e) {
+
+            }
+
+
         } catch (InvalidCreatureException e) {
             System.out.println("The fish you created is not valid!");
             System.out.println(e.getMessage());
