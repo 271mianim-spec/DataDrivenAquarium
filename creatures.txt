@@ -1,5 +1,1 @@
-4
-Fish, Nemo, 4, 3, 1, ><>
-Fish, Dory, 30, 2, -1, ><((('>
-Jellyfish, Bob, 10, 5, -1, ==>( )
-Crab, Shelly, 22, 2, 1
+CustomFish, g, 12, 1, 1, g

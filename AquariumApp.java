@@ -7,9 +7,11 @@ public class AquariumApp {
     static final int MAX_FISH = 8;
     static SeaCreature[] tank;
 
+    public static String fileName = "creatures.txt";
+
     static {
         try {
-            tank = loadCreatures("creatures.txt");
+            tank = loadCreatures(fileName);
         } catch (IOException e) {
             System.err.println("Error reading file");
         }
@@ -53,23 +55,9 @@ public class AquariumApp {
                 case "3":
                     System.out.println("This feature is a work in progress!");
 
-                    int currentAmountOfFish = 0;
-
-                    for (int i = 0; i < MAX_FISH; i++) {
-                        if (tank[i] != null) {
-                            currentAmountOfFish++;
-                        } else {
-                            break;
-                        }
-                    }
-
-                    if (currentAmountOfFish >= MAX_FISH) {
-                        System.out.println("The aquarium is full and new fish cannot be added");
-                    } else {
-                        FishMaker fishMaker = new FishMaker();
-                        fishMaker.makeFish();
-                        aquarium.display();
-                    }
+                    FishMaker fishMaker = new FishMaker();
+                    fishMaker.makeFish();
+                    aquarium.display();
 
                     break;
                 case "4":
@@ -91,24 +79,55 @@ public class AquariumApp {
         input.close();
     }
 
-    private static SeaCreature[] loadCreatures(String fileName) throws IOException {
+    public static SeaCreature[] loadCreatures(String fileName) throws IOException {
         FileReader fileReader = new FileReader(fileName);
         Scanner input = new Scanner(fileReader);
 
-        int numberOfCreatures = input.nextInt();
-        input.nextLine();
+        int numberOfCreatures = 0; //input.nextInt();
+//        input.nextLine();
 
-        tank = new SeaCreature[numberOfCreatures];
+        while (input.hasNextLine()) {
+            numberOfCreatures++;
 
-        for (int i = 0; i < numberOfCreatures; i++) {
+
+//            input.nextLine();
+
+            SeaCreature[] newTank = new SeaCreature[numberOfCreatures];
+            if (tank == null || tank.length > 0) {
+                for (int i = 0; i < numberOfCreatures-1; i++) {
+                    System.out.println("Readded "+tank[i].getName());
+                    newTank[i] = tank[i];
+                }
+            }
+
+            tank = newTank;
+
+            if (!input.hasNextLine()) {
+                System.out.println("Did not work!");
+            }
             String line = input.nextLine();
+            System.out.println(line);
             try{
-                tank[i] = createCreature(line);
+                tank[numberOfCreatures-1] = createCreature(line);
             } catch (InvalidCreatureException e) {
                 System.out.println(e.getMessage());
             }
-
         }
+
+        System.out.println("Number of Creatures: " + numberOfCreatures);
+        System.out.println("Tank Size: " + tank.length);
+
+//        input.close();
+//        Scanner input = new Scanner(fileReader);
+
+
+
+//        tank = new SeaCreature[numberOfCreatures-1];
+
+//        for (int i = 0; i < numberOfCreatures-1; i++) {
+//
+//
+//        }
 
         input.close();
         return tank;

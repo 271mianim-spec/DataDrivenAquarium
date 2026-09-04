@@ -1,4 +1,5 @@
-import java.io.File;
+import javax.swing.text.AbstractWriter;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -37,24 +38,53 @@ public class FishMaker {
 
         Random random = new Random();
         int randomPos = random.nextInt(1,Aquarium.TANK_WIDTH+1);
+
+        StringBuilder fishLine = new StringBuilder();
+        fishLine.append("CustomFish, ");
+        fishLine.append(FishName+", ");
+        fishLine.append(randomPos+", ");
+        fishLine.append(FishSpeed+", ");
+        fishLine.append("1, ");
+        fishLine.append(FishSymbol);
+
+        System.out.println(fishLine.toString());
+
+        SeaCreature[] oldTank = AquariumApp.tank;
+        SeaCreature[] newTank = new SeaCreature[AquariumApp.tank.length+1];
+        for  (int i = 0; i < newTank.length; i++) {
+            newTank[i] = AquariumApp.tank[i];
+        }
         try {
+            newTank[newTank.length-1] = new CustomFish(FishName, randomPos, FishSpeed, 1, FishSymbol);
+        } catch (Exception ex) {
 
-            try {
-               File file = new File("creatures.txt");
-               // Credits to "Kip" on StackOverflow for the documentation!
-//               Printer fileWriter = new Scanner(file);
+        }
 
-//               fileWriter.();
+        AquariumApp.tank = newTank;
+
+        try {
+//           File file = new File("creatures.txt");
+           // Credits to "Kip" on StackOverflow for the PrintWriter documentation
+           // Credits to "axtavt" fir FileOutputStream documentation
+           FileWriter fileWriter = new FileWriter(AquariumApp.fileName, true);
+           BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+           PrintWriter printWriter = new PrintWriter(bufferedWriter);
+
+//            PrintWriter fileWriter = new PrintWriter(new FileOutputStream(AquariumApp.fileName));
+
+           printWriter.append("\n").append(String.valueOf(fishLine));
+
+
+
+
 
 //               AquariumApp.tank[currentAmountOfFish] = new CustomFish(FishName, randomPos, FishSpeed, 1, FishSymbol);
-            } catch (Exception e) {
-
-            }
-
-
-        } catch (InvalidCreatureException e) {
-            System.out.println("The fish you created is not valid!");
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+
+
     }
 }
