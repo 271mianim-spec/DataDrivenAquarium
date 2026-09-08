@@ -12,6 +12,10 @@ public class Aquarium {
         this.turnNumber = 0;
     }
 
+    public void setCreatures(SeaCreature[] creatures) {
+        this.creatures = creatures;
+    }
+
     public void display() {
         System.out.println();
         System.out.println("TURN " + turnNumber);

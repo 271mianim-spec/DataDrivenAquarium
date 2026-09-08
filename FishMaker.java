@@ -1,5 +1,6 @@
 import javax.swing.text.AbstractWriter;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -25,7 +26,7 @@ public class FishMaker {
         System.out.print(" ");
         String FishSymbol = input.nextLine().trim();
 
-        input.close();
+//        input.close();
 
 //        int currentAmountOfFish = 0;
 //        for (int i = 0; i < AquariumApp.MAX_FISH; i++) {
@@ -51,14 +52,18 @@ public class FishMaker {
 
         SeaCreature[] oldTank = AquariumApp.tank;
         SeaCreature[] newTank = new SeaCreature[AquariumApp.tank.length+1];
-        for  (int i = 0; i < newTank.length; i++) {
+        for (int i = 0; i < oldTank.length; i++) {
             newTank[i] = AquariumApp.tank[i];
         }
+
         try {
             newTank[newTank.length-1] = new CustomFish(FishName, randomPos, FishSpeed, 1, FishSymbol);
-        } catch (Exception ex) {
-
+        } catch (InvalidCreatureException ex) {
+            System.out.println(ex.getMessage());
+            return;
         }
+
+        System.out.println(Arrays.toString(newTank));
 
         AquariumApp.tank = newTank;
 
@@ -74,6 +79,7 @@ public class FishMaker {
 
            printWriter.append("\n").append(String.valueOf(fishLine));
 
+           printWriter.close();
 
 
 
@@ -85,6 +91,6 @@ public class FishMaker {
             System.out.println(e.getMessage());
         }
 
-
+        return;
     }
 }

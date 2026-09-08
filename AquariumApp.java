@@ -57,6 +57,7 @@ public class AquariumApp {
 
                     FishMaker fishMaker = new FishMaker();
                     fishMaker.makeFish();
+                    aquarium.setCreatures(tank);
                     aquarium.display();
 
                     break;
