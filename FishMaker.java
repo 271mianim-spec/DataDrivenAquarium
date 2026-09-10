@@ -26,17 +26,6 @@ public class FishMaker {
         System.out.print(" ");
         String FishSymbol = input.nextLine().trim();
 
-//        input.close();
-
-//        int currentAmountOfFish = 0;
-//        for (int i = 0; i < AquariumApp.MAX_FISH; i++) {
-//            if (AquariumApp.tank[i] != null) {
-//                currentAmountOfFish++;
-//            } else {
-//                break;
-//            }
-//        }
-
         Random random = new Random();
         int randomPos = random.nextInt(1,Aquarium.TANK_WIDTH+1);
 
@@ -48,7 +37,7 @@ public class FishMaker {
         fishLine.append("1, ");
         fishLine.append(FishSymbol);
 
-        System.out.println(fishLine.toString());
+
 
         SeaCreature[] oldTank = AquariumApp.tank;
         SeaCreature[] newTank = new SeaCreature[AquariumApp.tank.length+1];
@@ -63,8 +52,6 @@ public class FishMaker {
             return;
         }
 
-        System.out.println(Arrays.toString(newTank));
-
         AquariumApp.tank = newTank;
 
         try {
@@ -75,16 +62,9 @@ public class FishMaker {
            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
            PrintWriter printWriter = new PrintWriter(bufferedWriter);
 
-//            PrintWriter fileWriter = new PrintWriter(new FileOutputStream(AquariumApp.fileName));
-
            printWriter.append("\n").append(String.valueOf(fishLine));
 
            printWriter.close();
-
-
-
-
-//               AquariumApp.tank[currentAmountOfFish] = new CustomFish(FishName, randomPos, FishSpeed, 1, FishSymbol);
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (IOException e) {

@@ -84,19 +84,14 @@ public class AquariumApp {
         FileReader fileReader = new FileReader(fileName);
         Scanner input = new Scanner(fileReader);
 
-        int numberOfCreatures = 0; //input.nextInt();
-//        input.nextLine();
+        int numberOfCreatures = 0;
 
         while (input.hasNextLine()) {
             numberOfCreatures++;
 
-
-//            input.nextLine();
-
             SeaCreature[] newTank = new SeaCreature[numberOfCreatures];
             if (tank == null || tank.length > 0) {
                 for (int i = 0; i < numberOfCreatures-1; i++) {
-                    System.out.println("Readded "+tank[i].getName());
                     newTank[i] = tank[i];
                 }
             }
@@ -117,18 +112,6 @@ public class AquariumApp {
 
         System.out.println("Number of Creatures: " + numberOfCreatures);
         System.out.println("Tank Size: " + tank.length);
-
-//        input.close();
-//        Scanner input = new Scanner(fileReader);
-
-
-
-//        tank = new SeaCreature[numberOfCreatures-1];
-
-//        for (int i = 0; i < numberOfCreatures-1; i++) {
-//
-//
-//        }
 
         input.close();
         return tank;
