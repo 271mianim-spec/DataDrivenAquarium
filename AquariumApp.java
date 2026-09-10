@@ -102,7 +102,6 @@ public class AquariumApp {
                 System.out.println("Did not work!");
             }
             String line = input.nextLine();
-            System.out.println(line);
             try{
                 tank[numberOfCreatures-1] = createCreature(line);
             } catch (InvalidCreatureException e) {
